@@ -34,9 +34,14 @@
         .status-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px dashed #222; margin-bottom: 10px; }
         .status-tag { background: #002b26; color: var(--cyan); padding: 2px 8px; font-size: 0.55rem; border-radius: 2px; }
 
+        /* Gaya baru untuk info suplai */
+        .supply-info { display: flex; justify-content: space-between; margin-top: 15px; border-top: 1px solid #222; padding-top: 15px; }
+        .supply-item { text-align: left; }
+        .supply-label { color: #444; font-size: 0.5rem; display: block; margin-bottom: 5px; }
+        .supply-value { color: var(--cyan); font-size: 0.8rem; }
+
         .log-screen { background: #000; padding: 15px; height: 180px; overflow: hidden; border: 1px solid #111; font-size: 0.6rem; color: var(--cyan); line-height: 1.6; margin-bottom: 25px; }
 
-        /* LOGO PENDUKUNG */
         .footer-icons { display: flex; justify-content: center; gap: 40px; margin-top: 30px; opacity: 0.4; }
     </style>
 </head>
@@ -64,6 +69,17 @@
         <div class="status-row" style="border-color: var(--cyan);">
             <span style="color: var(--cyan); font-size: 0.6rem; font-weight: bold;">LIQUIDITY POOL:</span>
             <span class="status-tag">LOCKED</span>
+        </div>
+
+        <div class="supply-info">
+            <div class="supply-item">
+                <span class="supply-label">TOTAL SUPPLY</span>
+                <span class="supply-value">980,000,000</span>
+            </div>
+            <div class="supply-item" style="text-align: right;">
+                <span class="supply-label">NETWORK</span>
+                <span class="supply-value" style="color: #fff;">SOLANA</span>
+            </div>
         </div>
     </div>
 
