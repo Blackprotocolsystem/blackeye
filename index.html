@@ -19,7 +19,6 @@
         .stats-bar { display: flex; justify-content: space-between; margin-bottom: 20px; gap: 10px; }
         .stat-item { background: var(--dark); padding: 12px; border: 1px solid #222; font-size: 0.6rem; flex: 1; text-align: center; }
 
-        /* TOMBOL PENGHUBUNG KE SWAP.HTML */
         .btn-swap-link { 
             width: 100%; padding: 18px; background: var(--cyan); color: #000; border: none; 
             font-weight: bold; font-family: inherit; cursor: pointer; margin-bottom: 30px;
@@ -36,6 +35,9 @@
         .status-tag { background: #002b26; color: var(--cyan); padding: 2px 8px; font-size: 0.55rem; border-radius: 2px; }
 
         .log-screen { background: #000; padding: 15px; height: 180px; overflow: hidden; border: 1px solid #111; font-size: 0.6rem; color: var(--cyan); line-height: 1.6; margin-bottom: 25px; }
+
+        /* LOGO PENDUKUNG */
+        .footer-icons { display: flex; justify-content: center; gap: 40px; margin-top: 30px; opacity: 0.4; }
     </style>
 </head>
 <body>
@@ -68,13 +70,20 @@
     <div class="log-screen" id="log-content">
         [SYSTEM] Black Eye Protocol V1.0 Online...<br>
     </div>
+
+    <div class="footer-icons">
+        <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" height="18">
+        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" height="18">
+        <img src="https://cryptologos.cc/logos/raydium-ray-logo.png" height="18">
+    </div>
+    <p style="text-align: center; color: #222; font-size: 0.45rem; margin-top: 20px;">POWERED BY BLACK EYE TECHNOLOGY © 2026</p>
 </div>
 
 <script>
     const log = document.getElementById('log-content');
     setInterval(() => {
         const hash = Math.random().toString(16).substring(2, 8).toUpperCase();
-        log.innerHTML += `> TX_${hash} confirmed. ${ (Math.random()*0.3).toFixed(4) } $BEYE Burned.<br>`;
+        log.innerHTML += `> TX_${hash} confirmed. OK.<br>`;
         if(log.childNodes.length > 15) log.removeChild(log.firstChild);
     }, 2500);
 </script>
