@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BLACK EYE | Global Protocol</title>
     <style>
-        :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --dark: #0d0d12; --red: #ff4444; }
+        :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --dark: #0d1117; --red: #ff4444; }
         * { box-sizing: border-box; }
         body {
             background-color: var(--bg); color: #e0e0e0; font-family: 'Courier New', monospace;
@@ -19,13 +19,22 @@
         .stats-bar { display: flex; justify-content: space-between; margin-bottom: 20px; gap: 10px; }
         .stat-item { background: var(--dark); padding: 12px; border: 1px solid #222; font-size: 0.6rem; flex: 1; text-align: center; }
 
-        .btn-swap-link { 
+        /* NAVIGASI UTAMA */
+        .btn-main { 
             width: 100%; padding: 18px; background: var(--cyan); color: #000; border: none; 
-            font-weight: bold; font-family: inherit; cursor: pointer; margin-bottom: 30px;
-            box-shadow: 0 0 20px rgba(3, 218, 198, 0.5); text-transform: uppercase; letter-spacing: 3px;
+            font-weight: bold; font-family: inherit; cursor: pointer; margin-bottom: 10px;
+            box-shadow: 0 0 20px rgba(3, 218, 198, 0.3); text-transform: uppercase; letter-spacing: 3px;
             transition: 0.3s; font-size: 0.9rem; display: block; text-align: center; text-decoration: none;
         }
-        .btn-swap-link:hover { box-shadow: 0 0 30px var(--cyan); transform: translateY(-2px); background: #fff; }
+        .btn-main:hover { box-shadow: 0 0 30px var(--cyan); transform: translateY(-2px); background: #fff; }
+
+        .btn-pro {
+            width: 100%; padding: 12px; background: transparent; color: var(--purple); border: 1px solid var(--purple);
+            font-weight: bold; font-family: inherit; cursor: pointer; margin-bottom: 30px;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; font-size: 0.7rem;
+            display: block; text-align: center; text-decoration: none;
+        }
+        .btn-pro:hover { background: rgba(187, 134, 252, 0.1); color: #fff; box-shadow: 0 0 15px var(--purple); }
 
         .ca-box { border: 1px solid #333; padding: 20px; margin-bottom: 25px; position: relative; }
         .ca-label { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 0 10px; color: #444; font-size: 0.6rem; letter-spacing: 3px; }
@@ -34,13 +43,12 @@
         .status-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px dashed #222; margin-bottom: 10px; }
         .status-tag { background: #002b26; color: var(--cyan); padding: 2px 8px; font-size: 0.55rem; border-radius: 2px; }
 
-        /* Gaya baru untuk info suplai */
         .supply-info { display: flex; justify-content: space-between; margin-top: 15px; border-top: 1px solid #222; padding-top: 15px; }
         .supply-item { text-align: left; }
         .supply-label { color: #444; font-size: 0.5rem; display: block; margin-bottom: 5px; }
         .supply-value { color: var(--cyan); font-size: 0.8rem; }
 
-        .log-screen { background: #000; padding: 15px; height: 180px; overflow: hidden; border: 1px solid #111; font-size: 0.6rem; color: var(--cyan); line-height: 1.6; margin-bottom: 25px; }
+        .log-screen { background: #000; padding: 15px; height: 150px; overflow: hidden; border: 1px solid #111; font-size: 0.6rem; color: var(--cyan); line-height: 1.6; margin-bottom: 25px; }
 
         .footer-icons { display: flex; justify-content: center; gap: 40px; margin-top: 30px; opacity: 0.4; }
     </style>
@@ -55,7 +63,8 @@
         <div class="stat-item">TPS: <span id="tps-val">32.8</span></div>
     </div>
 
-    <a href="swap.html" class="btn-swap-link">ENTER BEYE SWAP (LIVE CHART)</a>
+    <a href="swap.html" class="btn-main">ENTER BEYE SWAP</a>
+    <a href="pro.html" class="btn-pro">OPEN PRO TERMINAL (ORDER BOOK)</a>
 
     <div class="ca-box">
         <span class="ca-label">CONTRACT ADDRESS</span>
@@ -100,7 +109,8 @@
     setInterval(() => {
         const hash = Math.random().toString(16).substring(2, 8).toUpperCase();
         log.innerHTML += `> TX_${hash} confirmed. OK.<br>`;
-        if(log.childNodes.length > 15) log.removeChild(log.firstChild);
+        if(log.childNodes.length > 12) log.removeChild(log.firstChild);
+        document.getElementById('tps-val').innerText = (Math.random() * 5 + 30).toFixed(1);
     }, 2500);
 </script>
 </body>
