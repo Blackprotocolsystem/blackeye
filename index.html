@@ -77,10 +77,12 @@
             padding: 10px; font-size: 0.7rem; font-weight: bold; cursor: pointer; width: 100%;
         }
         .log-screen {
-            background: #000; padding: 15px; height: 160px; overflow: hidden;
+            background: #000; padding: 15px; height: 180px; overflow-y: scroll;
             border: 1px solid #111; font-size: 0.6rem; color: var(--cyan); line-height: 1.4;
             text-align: left;
         }
+        /* Sembunyikan scrollbar tapi tetap bisa scroll */
+        .log-screen::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
@@ -129,19 +131,26 @@
     }
     
     const log = document.getElementById('log-content');
-    setInterval(() => {
+    
+    // Fungsi untuk menambah baris log secara otomatis
+    function addLog() {
         const hash = Math.random().toString(16).substring(2, 10).toUpperCase();
         const amt = (Math.random() * 50).toFixed(2);
         const node = Math.floor(Math.random() * 99);
-        log.innerHTML += `> [${new Date().toLocaleTimeString()}] Broadcast: ${hash} sent ${amt} BEYE to Node_${node}<br>`;
+        const time = new Date().toLocaleTimeString();
         
-        // Agar log otomatis scroll ke bawah
-        if(log.childNodes.length > 20) {
-            log.removeChild(log.firstChild);
-        }
-        // Update TPS secara acak
+        const newEntry = `> [${time}] Broadcast: ${hash} sent ${amt} BEYE to Node_${node}<br>`;
+        log.innerHTML += newEntry;
+        
+        // Selalu scroll ke paling bawah
+        log.scrollTop = log.scrollHeight;
+        
+        // Update TPS
         document.getElementById('tps-val').innerText = (Math.random() * 20 + 15).toFixed(1);
-    }, 1500);
+    }
+
+    // Jalankan setiap 1 detik
+    setInterval(addLog, 1000);
 </script>
 </body>
 </html>
