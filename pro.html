@@ -3,25 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEYE PRO | Elite Terminal</title>
+    <title>BEYE PRO | Professional Terminal</title>
     <style>
         :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --border: #1a1a2e; }
-        body { background-color: var(--bg); color: #e0e0e0; font-family: 'Courier New', monospace; margin: 0; height: 100vh; overflow: hidden; }
-        
-        /* Navbar ala Raydium */
+        body { background-color: var(--bg); color: #e0e0e0; font-family: sans-serif; margin: 0; height: 100vh; overflow: hidden; }
         .navbar { height: 50px; background: #000; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; border-bottom: 1px solid var(--border); }
-        .logo { color: var(--purple); font-weight: bold; text-decoration: none; letter-spacing: 3px; font-size: 1rem; }
-        .nav-links a { color: var(--cyan); text-decoration: none; font-size: 0.65rem; margin-left: 10px; border: 1px solid var(--cyan); padding: 5px 10px; border-radius: 4px; text-transform: uppercase; }
-
-        /* Container 3 Kolom */
-        .pro-grid { display: grid; grid-template-columns: 320px 1fr 320px; height: calc(100vh - 50px); gap: 1px; background: var(--border); }
-        .panel { background: var(--bg); display: flex; flex-direction: column; position: relative; }
-        .panel-header { background: #000; padding: 10px; font-size: 0.7rem; color: var(--purple); border-bottom: 1px solid #111; letter-spacing: 1px; }
-
-        /* Widget Container */
-        .widget-wrap { flex: 1; width: 100%; height: 100%; }
-
-        @media (max-width: 1000px) {
+        .logo { color: var(--purple); font-weight: bold; text-decoration: none; letter-spacing: 2px; }
+        .pro-grid { display: grid; grid-template-columns: 300px 1fr 300px; height: calc(100vh - 50px); gap: 1px; background: var(--border); }
+        .panel { background: var(--bg); display: flex; flex-direction: column; }
+        .panel-header { background: #000; padding: 8px 12px; font-size: 0.65rem; color: var(--purple); border-bottom: 1px solid #111; }
+        @media (max-width: 1100px) { 
             .pro-grid { grid-template-columns: 1fr; overflow-y: auto; }
             .panel:not(.main-chart) { display: none; }
         }
@@ -29,71 +20,26 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">BEYE PRO TERMINAL</a>
-        <div class="nav-links">
-            <a href="index.html">DASHBOARD</a>
-            <a href="swap.html">SWAP</a>
-        </div>
+        <a href="index.html" class="logo">BEYE PRO</a>
+        <a href="swap.html" style="color:var(--cyan); text-decoration:none; font-size:0.7rem; border:1px solid var(--cyan); padding:5px 10px; border-radius:4px;">QUICK SWAP</a>
     </nav>
 
     <div class="pro-grid">
         <div class="panel">
-            <div class="panel-header">Top Assets (Live Data)</div>
-            <div class="widget-wrap">
-                <div class="tradingview-widget-container" style="height:100%">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                    {
-                      "width": "100%", "height": "100%",
-                      "symbolsGroups": [
-                        { "name": "Ranked by Market Cap",
-                          "symbols": [
-                            {"name": "BINANCE:BTCUSDT", "displayName": "1. Bitcoin"},
-                            {"name": "BINANCE:ETHUSDT", "displayName": "2. Ethereum"},
-                            {"name": "BINANCE:SOLUSDT", "displayName": "3. Solana"},
-                            {"name": "BINANCE:BNBUSDT", "displayName": "4. Binance Coin"},
-                            {"name": "BINANCE:XRPUSDT", "displayName": "5. Ripple"},
-                            {"name": "BINANCE:ADAUSDT", "displayName": "6. Cardano"},
-                            {"name": "BINANCE:AVAXUSDT", "displayName": "7. Avalanche"},
-                            {"name": "BINANCE:DOGEUSDT", "displayName": "8. Dogecoin"},
-                            {"name": "BINANCE:DOTUSDT", "displayName": "9. Polkadot"},
-                            {"name": "BINANCE:LINKUSDT", "displayName": "10. Chainlink"}
-                          ]
-                        }
-                      ],
-                      "showSymbolLogo": true, "colorTheme": "dark", "isTransparent": true, "locale": "id"
-                    }
-                    </script>
-                </div>
-            </div>
+            <div class="panel-header">MARKET WATCH</div>
+            <iframe src="https://www.tradingview.com/embed-widget/market-overview/?locale=en#%7B%22colorTheme%22%3A%22dark%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22BINANCE%3ABTCUSDT%22%7D%2C%7B%22s%22%3A%22BINANCE%3AETHUSDT%22%7D%2C%7B%22s%22%3A%22BINANCE%3ASOLUSDT%22%7D%2C%7B%22s%22%3A%22BINANCE%3ABNBUSDT%22%7D%5D%7D" style="width:100%; height:100%; border:none;"></iframe>
         </div>
 
         <div class="panel main-chart">
-            <div class="panel-header">Trading Pair: BEYE/SOL</div>
-            <iframe 
-                src="https://dexscreener.com/solana/LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse?embed=1&theme=dark&trades=1&info=0" 
-                style="width: 100%; height: 100%; border: none;">
-            </iframe>
+            <div class="panel-header">BEYE/SOL - REALTIME CHART</div>
+            <iframe src="https://dexscreener.com/solana/LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse?embed=1&theme=dark&trades=1" style="width:100%; height:100%; border:none;"></iframe>
         </div>
 
         <div class="panel">
-            <div class="panel-header">Technical Analysis</div>
-            <div class="widget-wrap">
-                <div class="tradingview-widget-container" style="height:400px">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-                    {
-                      "interval": "1m", "width": "100%", "isTransparent": true, "height": "100%",
-                      "symbol": "BINANCE:SOLUSDT", "showIntervalTabs": true, "displayMode": "single",
-                      "locale": "id", "colorTheme": "dark"
-                    }
-                    </script>
-                </div>
-                
-                <div style="padding: 20px; border-top: 1px solid #111;">
-                    <button onclick="location.href='swap.html'" style="width: 100%; padding: 15px; background: var(--cyan); border: none; font-weight: bold; cursor: pointer; color: #000; border-radius: 4px; box-shadow: 0 0 15px rgba(3, 218, 198, 0.4);">CONNECT WALLET</button>
-                    <p style="font-size: 0.5rem; color: #444; text-align: center; margin-top: 10px;">*Ready for Top 100 CMC Listing</p>
-                </div>
+            <div class="panel-header">TECHNICAL ANALYSIS</div>
+            <iframe src="https://www.tradingview.com/embed-widget/technical-analysis/?locale=en#%7B%22symbol%22%3A%22BINANCE%3ASOLUSDT%22%2C%22interval%22%3A%221m%22%2C%22colorTheme%22%3A%22dark%22%7D" style="width:100%; height:400px; border:none;"></iframe>
+            <div style="padding:20px;">
+                <button onclick="location.href='swap.html'" style="width:100%; padding:15px; background:var(--cyan); border:none; font-weight:bold; cursor:pointer; border-radius:4px;">BUY $BEYE NOW</button>
             </div>
         </div>
     </div>
