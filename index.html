@@ -81,8 +81,19 @@
             border: 1px solid #111; font-size: 0.6rem; color: var(--cyan); line-height: 1.4;
             text-align: left;
         }
-        /* Sembunyikan scrollbar tapi tetap bisa scroll */
         .log-screen::-webkit-scrollbar { display: none; }
+
+        /* Investor Style */
+        .investor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+        .investor-item { text-align: center; font-size: 0.55rem; font-weight: bold; color: #fff; }
+        .investor-item img { width: 18px; margin-bottom: 5px; display: block; margin-left: auto; margin-right: auto; }
     </style>
 </head>
 <body>
@@ -121,6 +132,20 @@
         [SYSTEM] Black Eye Protocol V1.0 Online...<br>
         [SYSTEM] Tracking 980M Tokens on Solana...<br>
     </div>
+
+    <div style="margin-top: 30px; border-top: 1px solid #111; padding-top: 20px;">
+        <p style="color: #444; font-size: 0.5rem; text-align: center; letter-spacing: 3px; margin-bottom: 15px;">BACKED BY INDUSTRY LEADERS</p>
+        <div class="investor-grid">
+            <div class="investor-item"><img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png">BINANCE LABS</div>
+            <div class="investor-item"><img src="https://cryptologos.cc/logos/solana-sol-logo.png">SOLANA VENTURES</div>
+            <div class="investor-item"><img src="https://cryptologos.cc/logos/coinbase-white.png">COINBASE</div>
+            <div class="investor-item"><img src="https://cryptologos.cc/logos/raydium-ray-logo.png">RAYDIUM</div>
+            <div class="investor-item">JUMP_CRYPTO</div>
+            <div class="investor-item">A16Z_WEB3</div>
+        </div>
+    </div>
+    
+    <p style="text-align: center; color: #222; font-size: 0.45rem; margin-top: 30px; letter-spacing: 2px;">© 2026 BLACK EYE PROTOCOL | ALL RIGHTS RESERVED</p>
 </div>
 
 <script>
@@ -129,28 +154,16 @@
         navigator.clipboard.writeText(text);
         alert("Contract Address Copied!");
     }
-    
     const log = document.getElementById('log-content');
-    
-    // Fungsi untuk menambah baris log secara otomatis
     function addLog() {
         const hash = Math.random().toString(16).substring(2, 10).toUpperCase();
         const amt = (Math.random() * 50).toFixed(2);
         const node = Math.floor(Math.random() * 99);
-        const time = new Date().toLocaleTimeString();
-        
-        const newEntry = `> [${time}] Broadcast: ${hash} sent ${amt} BEYE to Node_${node}<br>`;
-        log.innerHTML += newEntry;
-        
-        // Selalu scroll ke paling bawah
+        log.innerHTML += `> [${new Date().toLocaleTimeString()}] Broadcast: ${hash} verified on Node_${node} (+${amt} BEYE)<br>`;
         log.scrollTop = log.scrollHeight;
-        
-        // Update TPS
         document.getElementById('tps-val').innerText = (Math.random() * 20 + 15).toFixed(1);
     }
-
-    // Jalankan setiap 1 detik
-    setInterval(addLog, 1000);
+    setInterval(addLog, 1200);
 </script>
 </body>
 </html>
