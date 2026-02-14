@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEYE PRO | Advanced Terminal</title>
+    <title>BEYE PRO | Live Market Terminal</title>
     <style>
         :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --dark: #0d1117; }
         body { background-color: var(--bg); color: #e0e0e0; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
         
         .navbar { padding: 10px 20px; border-bottom: 1px solid #1a1a2e; display: flex; justify-content: space-between; align-items: center; background: #000; height: 50px; }
         .logo { color: var(--purple); font-weight: bold; letter-spacing: 3px; text-decoration: none; }
-        .nav-links a { color: var(--cyan); text-decoration: none; font-size: 0.7rem; margin-left: 15px; border: 1px solid var(--cyan); padding: 4px 8px; }
+        .nav-links a { color: var(--cyan); text-decoration: none; font-size: 0.7rem; margin-left: 15px; border: 1px solid var(--cyan); padding: 4px 8px; border-radius: 4px; }
 
-        .pro-container { display: grid; grid-template-columns: 250px 1fr 300px; height: calc(100vh - 50px); gap: 2px; background: #1a1a2e; }
+        .pro-container { display: grid; grid-template-columns: 300px 1fr 300px; height: calc(100vh - 50px); gap: 2px; background: #1a1a2e; }
         
-        /* Sidebar Market Info */
-        .sidebar { background: var(--bg); padding: 10px; font-size: 0.6rem; overflow-y: auto; }
-        .market-item { padding: 8px; border-bottom: 1px solid #111; display: flex; justify-content: space-between; }
+        /* Kolom Kiri: Watchlist Real-time */
+        .sidebar { background: var(--bg); padding: 5px; overflow: hidden; }
 
-        /* Main Chart Area */
-        .main-chart { background: #000; position: relative; }
+        /* Kolom Tengah: Chart Utama */
+        .main-chart { background: #000; display: flex; flex-direction: column; }
 
-        /* Order Book Area */
-        .order-book { background: var(--bg); border-left: 1px solid #1a1a2e; padding: 10px; font-size: 0.6rem; }
-        .book-row { display: flex; justify-content: space-between; padding: 2px 0; }
+        /* Kolom Kanan: Order Book ala Raydium */
+        .order-book { background: var(--bg); padding: 10px; font-size: 0.65rem; display: flex; flex-direction: column; }
+        .book-header { color: var(--purple); margin-bottom: 15px; font-size: 0.7rem; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .book-row { display: flex; justify-content: space-between; padding: 4px 0; font-family: 'Courier New', monospace; }
         .bid { color: var(--cyan); }
         .ask { color: #ff4444; }
 
-        @media (max-width: 900px) {
+        .trade-box { margin-top: auto; border: 1px solid #222; padding: 15px; background: #0a0a0f; }
+        .btn-buy { background: var(--cyan); color: #000; border: none; width: 100%; padding: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        
+        @media (max-width: 1000px) {
             .pro-container { grid-template-columns: 1fr; overflow-y: auto; }
             .sidebar, .order-book { display: none; }
         }
@@ -35,41 +38,95 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">BEYE PRO</a>
+        <a href="index.html" class="logo">BEYE PRO TERMINAL</a>
         <div class="nav-links">
             <a href="index.html">DASHBOARD</a>
-            <a href="swap.html">BASIC SWAP</a>
+            <a href="swap.html">SWAP</a>
         </div>
     </nav>
 
     <div class="pro-container">
         <div class="sidebar">
-            <div style="color:var(--purple); margin-bottom:10px;">MARKETS</div>
-            <div class="market-item"><span>BEYE/SOL</span><span class="bid">ACTIVE</span></div>
-            <div class="market-item"><span>BTC/SOL</span><span style="color:#444">SOON</span></div>
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                "colorTheme": "dark",
+                "dateRange": "12M",
+                "showChart": false,
+                "locale": "id",
+                "width": "100%",
+                "height": "100%",
+                "largeChartUrl": "",
+                "isTransparent": true,
+                "showSymbolLogo": true,
+                "showFloatingTooltip": false,
+                "tabs": [
+                    {
+                    "title": "Crypto",
+                    "symbols": [
+                        {"s": "BINANCE:BTCUSDT"},
+                        {"s": "BINANCE:ETHUSDT"},
+                        {"s": "BINANCE:SOLUSDT"},
+                        {"s": "BINANCE:BNBUSDT"}
+                    ]
+                    }
+                ]
+                }
+                </script>
+            </div>
         </div>
 
         <div class="main-chart">
             <iframe 
-                src="https://dexscreener.com/solana/LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse?embed=1&theme=dark" 
+                src="https://dexscreener.com/solana/LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse?embed=1&theme=dark&trades=0&info=0" 
                 style="width: 100%; height: 100%; border: none;">
             </iframe>
         </div>
 
         <div class="order-book">
-            <div style="color:var(--purple); margin-bottom:10px;">ORDER BOOK</div>
-            <div class="book-row"><span>PRICE(SOL)</span><span>SIZE(BEYE)</span></div>
-            <div class="book-row ask"><span>0.000452</span><span>12,400</span></div>
-            <div class="book-row ask"><span>0.000451</span><span>5,000</span></div>
-            <div style="text-align:center; padding:10px; font-size:0.8rem; color:var(--cyan);">0.000450</div>
-            <div class="book-row bid"><span>0.000449</span><span>8,200</span></div>
-            <div class="book-row bid"><span>0.000448</span><span>25,000</span></div>
+            <div class="book-header">ORDER BOOK (BEYE/SOL)</div>
+            <div id="order-book-content">
+                </div>
             
-            <div style="margin-top:20px; border:1px solid var(--purple); padding:10px; text-align:center;">
-                <span style="font-size:0.5rem; display:block;">PRO TRADING</span>
-                <button style="background:var(--purple); border:none; width:100%; margin-top:5px; font-family:inherit; cursor:pointer;" onclick="location.href='swap.html'">OPEN SWAP</button>
+            <div class="trade-box">
+                <div style="display:flex; justify-content:space-between; font-size:0.5rem; margin-bottom:5px;">
+                    <span>Size: SOL</span>
+                    <span style="color:var(--cyan)">Available: 0.00</span>
+                </div>
+                <input type="text" value="0.1" style="width:100%; background:#000; border:1px solid #333; color:#fff; padding:5px; font-family:inherit;">
+                <button class="btn-buy" onclick="location.href='swap.html'">CONNECT WALLET</button>
             </div>
         </div>
     </div>
+
+    <script>
+        // Simulasi Order Book yang bergerak
+        function updateOrderBook() {
+            const container = document.getElementById('order-book-content');
+            let html = '';
+            
+            // Generate Fake Asks (Sell)
+            for(let i=0; i<5; i++) {
+                const price = (0.000450 + (Math.random() * 0.00001)).toFixed(6);
+                const size = (Math.random() * 5000 + 100).toFixed(0);
+                html += `<div class="book-row ask"><span>${price}</span><span>${size}</span></div>`;
+            }
+            
+            html += `<div style="text-align:center; padding:10px; font-size:0.9rem; color:var(--cyan); border-top:1px solid #222; border-bottom:1px solid #222; margin:5px 0;">0.000449 ↓</div>`;
+            
+            // Generate Fake Bids (Buy)
+            for(let i=0; i<5; i++) {
+                const price = (0.000440 + (Math.random() * 0.00001)).toFixed(6);
+                const size = (Math.random() * 5000 + 100).toFixed(0);
+                html += `<div class="book-row bid"><span>${price}</span><span>${size}</span></div>`;
+            }
+            
+            container.innerHTML = html;
+        }
+
+        setInterval(updateOrderBook, 2000);
+        updateOrderBook();
+    </script>
 </body>
 </html>
