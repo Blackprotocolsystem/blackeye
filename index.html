@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,22 +21,22 @@
         .stat-val { font-size: 1.2rem; font-weight: bold; color: var(--cyan); display: block; }
         .stat-label { font-size: 0.6rem; color: #888; text-transform: uppercase; margin-top: 5px; }
 
-        /* BURN PLAN SECTION */
-        .burn-section { margin: 40px 20px; padding: 30px; border: 1px solid var(--border); background: rgba(10, 10, 15, 0.9); border-radius: 8px; box-shadow: 0 0 30px rgba(187, 134, 252, 0.1); }
+        .burn-section { margin: 40px 20px; padding: 30px; border: 1px solid var(--border); background: rgba(10, 10, 15, 0.9); border-radius: 8px; }
         .burn-header { color: var(--purple); font-size: 1rem; letter-spacing: 3px; text-align: center; margin-bottom: 30px; }
         .burn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
         .burn-info { border-left: 3px solid var(--cyan); padding-left: 20px; }
-        .burn-progress { border-left: 3px solid var(--purple); padding-left: 20px; }
         .progress-bar { width: 100%; height: 8px; background: #1a1a2e; border-radius: 10px; margin: 15px 0; overflow: hidden; }
         .progress-fill { width: 0%; height: 100%; background: var(--purple); box-shadow: 0 0 10px var(--purple); }
 
-        /* LOG ACTIVITY */
-        .log-container { margin: 20px; background: #000; border: 1px solid var(--border); padding: 15px; height: 200px; overflow-y: auto; font-size: 0.7rem; border-radius: 4px; }
-        .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 5px; }
-        .time { color: #555; margin-right: 10px; }
-        .action { color: var(--cyan); }
+        /* PARTNER LOGOS */
+        .partners { text-align: center; padding: 40px 20px; border-top: 1px solid #111; }
+        .partners p { font-size: 0.6rem; color: #444; margin-bottom: 20px; letter-spacing: 2px; }
+        .partner-list { display: flex; justify-content: center; gap: 30px; filter: grayscale(100%); opacity: 0.5; flex-wrap: wrap; }
+        .partner-list img { height: 25px; }
 
-        footer { text-align: center; font-size: 0.6rem; color: #444; margin-top: 50px; padding: 20px; border-top: 1px solid #111; }
+        .log-container { margin: 20px; background: #000; border: 1px solid var(--border); padding: 15px; height: 150px; overflow-y: auto; font-size: 0.7rem; border-radius: 4px; }
+        .log-entry { margin-bottom: 5px; border-bottom: 1px solid #111; padding-bottom: 5px; }
+        .action { color: var(--cyan); }
     </style>
 </head>
 <body>
@@ -51,7 +51,7 @@
 
     <section class="hero">
         <h1>BLACK EYE</h1>
-        <p>THE EYE THAT NEVER SLEEPS | SOLANA NETWORK</p>
+        <p>THE EYE THAT NEVER SLEEPS | POWERED BY SOLANA</p>
     </section>
 
     <div class="stats-grid">
@@ -70,59 +70,49 @@
     </div>
 
     <div class="burn-section">
-        <div class="burn-header">🔥 THE GREAT BURN PLAN 🔥</div>
+        <div class="burn-header">🔥 THE STRATEGIC BURN PLAN 🔥</div>
         <div class="burn-grid">
             <div class="burn-info">
-                <p style="font-size: 0.75rem; color: var(--cyan); margin: 0;">PLANNED FOR DESTRUCTION</p>
-                <p style="font-size: 1.5rem; font-weight: bold; margin: 10px 0; letter-spacing: 1px;">245,000,000 $BEYE</p>
-                <p style="font-size: 0.65rem; color: #aaa; line-height: 1.5;">25% dari total suplai akan dibakar secara permanen untuk menciptakan kelangkaan ekstrem bagi seluruh holder $BEYE.</p>
+                <p style="font-size: 0.75rem; color: var(--cyan); margin: 0;">ALLOCATED FOR DESTRUCTION</p>
+                <p style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">245,000,000 $BEYE</p>
+                <p style="font-size: 0.65rem; color: #aaa; line-height: 1.5;">25% of total supply will be permanently burned to ensure extreme scarcity and value growth for all holders.</p>
             </div>
-            <div class="burn-progress">
-                <p style="font-size: 0.75rem; color: var(--purple); margin: 0;">BURN STATUS: <span style="color: #fff;">WAITING LAUNCH</span></p>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <p style="font-size: 0.6rem; color: #888;">Current Progress: 0% Burned | 100% In Reserve</p>
-                <p style="font-size: 0.55rem; color: #444; margin-top: 10px;">*Pembakaran dimulai setelah listing Raydium selesai.</p>
+            <div style="border-left: 3px solid var(--purple); padding-left: 20px;">
+                <p style="font-size: 0.75rem; color: var(--purple); margin: 0;">BURN STATUS: <span style="color: #fff;">PENDING LAUNCH</span></p>
+                <div class="progress-bar"><div class="progress-fill"></div></div>
+                <p style="font-size: 0.6rem; color: #888;">Current Progress: 0% Burned</p>
             </div>
         </div>
     </div>
 
     <div class="log-container" id="log-box">
-        <div class="log-entry"><span class="time">[23:58:01]</span> <span class="action">SYSTEM:</span> Initializing Black Eye Protocol...</div>
-        <div class="log-entry"><span class="time">[23:58:45]</span> <span class="action">SYSTEM:</span> 980M Supply Verified on Solana.</div>
-        <div class="log-entry"><span class="time">[23:59:12]</span> <span class="action">SYSTEM:</span> Pro Terminal Widget Connected.</div>
-        <div class="log-entry"><span class="time">[00:00:01]</span> <span class="action">SYSTEM:</span> Waiting for Liquidity Injection (0.5 SOL)...</div>
+        <div class="log-entry"><span class="action">SYSTEM:</span> Verifying $BEYE Smart Contract... Success.</div>
+        <div class="log-entry"><span class="action">SYSTEM:</span> Global Liquidity Bridge Initialized.</div>
     </div>
 
-    <footer>
-        &copy; 2026 BLACK EYE PROTOCOL | $BEYE. NO FINANCIAL ADVICE.
-    </footer>
+    <div class="partners">
+        <p>SUPPORTED DATA & EXCHANGES</p>
+        <div class="partner-list">
+            <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=024" alt="Binance">
+            <img src="https://cryptologos.cc/logos/solana-sol-logo.png?v=024" alt="Solana">
+            <img src="https://cryptologos.cc/logos/raydium-ray-logo.png?v=024" alt="Raydium">
+            <img src="https://cryptologos.cc/logos/coinmarketcap-cmc-logo.png?v=024" alt="CMC">
+        </div>
+    </div>
 
     <script>
-        // Simulasi log berjalan sederhana
         const logBox = document.getElementById('log-box');
-        const actions = [
-            "Syncing Market Data...",
-            "Checking Liquidity Pool...",
-            "Monitoring Founder Wallet...",
-            "Preparing Burn Sequence...",
-            "Network Secure: 100%"
-        ];
-
+        const actions = ["Syncing Global Markets...", "Analyzing SOL Liquidity...", "Founder Wallet: Verified", "Security Protocol: Active"];
         setInterval(() => {
             const now = new Date();
             const timeStr = `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
-            const action = actions[Math.floor(Math.random() * actions.length)];
-            
             const div = document.createElement('div');
             div.className = 'log-entry';
-            div.innerHTML = `<span class="time">${timeStr}</span> <span class="action">UPDATE:</span> ${action}`;
+            div.innerHTML = `<span style="color:#555">${timeStr}</span> <span class="action">UPDATE:</span> ${actions[Math.floor(Math.random()*actions.length)]}`;
             logBox.appendChild(div);
             logBox.scrollTop = logBox.scrollHeight;
-            
-            if (logBox.children.length > 20) logBox.removeChild(logBox.firstChild);
-        }, 5000);
+            if (logBox.children.length > 10) logBox.removeChild(logBox.firstChild);
+        }, 4000);
     </script>
 </body>
 </html>
