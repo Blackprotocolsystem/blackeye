@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEYE SWAP | Trading Interface</title>
+    <style>
+        :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --dark: #0d1117; }
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--bg); color: #e0e0e0; font-family: 'Courier New', monospace; margin: 0;
+            background-image: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%),
+            linear-gradient(90deg, rgba(255,0,0,0.04), rgba(0,255,0,0.01), rgba(0,0,255,0.04));
+            background-size: 100% 2px, 3px 100%;
+        }
+        .navbar {
+            padding: 15px 25px; border-bottom: 1px solid #1a1a2e; display: flex; 
+            justify-content: space-between; align-items: center; background: #000;
+        }
+        .logo { color: var(--purple); font-weight: bold; letter-spacing: 5px; text-decoration: none; font-size: 1.2rem; }
+        .back-btn { color: var(--cyan); text-decoration: none; font-size: 0.7rem; border: 1px solid var(--cyan); padding: 8px 15px; border-radius: 4px; transition: 0.3s; }
+        .back-btn:hover { background: var(--cyan); color: #000; }
+        
+        .main-content {
+            display: flex; flex-direction: column; gap: 20px; padding: 20px; max-width: 1300px; margin: auto;
+        }
+        @media (min-width: 950px) { .main-content { flex-direction: row; align-items: flex-start; } }
+
+        .chart-box {
+            flex: 1.6; background: #000; border: 1px solid #222; height: 550px; border-radius: 12px; overflow: hidden;
+        }
+
+        .swap-box {
+            flex: 1; background: var(--dark); border: 1px solid var(--purple); border-radius: 12px; 
+            min-height: 550px; padding: 10px; box-shadow: 0 0 30px rgba(187, 134, 252, 0.1);
+        }
+
+        /* Stats Bar Tambahan agar Berbobot */
+        .stats-mini { display: flex; gap: 10px; margin-bottom: 15px; }
+        .stat-v { background: #000; border: 1px solid #222; padding: 5px 10px; font-size: 0.55rem; flex: 1; text-align: center; }
+
+        /* Log Screen di bawah Chart */
+        .log-mini { 
+            background: #000; border: 1px solid #111; padding: 10px; 
+            font-size: 0.55rem; color: var(--cyan); height: 80px; overflow: hidden; margin-top: 15px; 
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">BLACK EYE</a>
+        <a href="index.html" class="back-btn">← BACK TO DASHBOARD</a>
+    </nav>
+
+    <div class="main-content">
+        <div style="flex: 1.6;">
+            <div class="stats-mini">
+                <div class="stat-v">NETWORK: <span style="color:var(--cyan)">SOLANA</span></div>
+                <div class="stat-v">TPS: <span id="tps-val" style="color:var(--purple)">32.4</span></div>
+                <div class="stat-v">STATUS: <span style="color:var(--cyan)">SECURE</span></div>
+            </div>
+
+            <div class="chart-box">
+                <iframe 
+                    src="https://dexscreener.com/solana/LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse?embed=1&theme=dark&trades=0&info=0" 
+                    style="width: 100%; height: 100%; border: none;">
+                </iframe>
+            </div>
+
+            <div class="log-mini" id="log-content">
+                [SYSTEM] Jupiter Aggregator Connected...<br>
+                [SYSTEM] Initializing $BEYE liquidity feed...<br>
+            </div>
+        </div>
+
+        <div class="swap-box">
+            <div id="jupiter-terminal"></div>
+        </div>
+    </div>
+
+    <script src="https://terminal.jup.ag/main-v2.js"></script>
+    <script>
+        window.Jupiter.init({
+            displayMode: "integrated",
+            integratedTargetId: "jupiter-terminal",
+            endpoint: "https://api.mainnet-beta.solana.com",
+            strictTokenList: false,
+            formProps: {
+                fixedOutputMint: true,
+                initialOutputMint: "LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse",
+            },
+        });
+
+        // Script Animasi Log
+        const log = document.getElementById('log-content');
+        setInterval(() => {
+            const hash = Math.random().toString(16).substring(2, 6).toUpperCase();
+            log.innerHTML += `> Syncing block_${hash}... OK<br>`;
+            if(log.childNodes.length > 8) log.removeChild(log.firstChild);
+            document.getElementById('tps-val').innerText = (Math.random() * 5 + 30).toFixed(1);
+        }, 3000);
+    </script>
+</body>
+</html>
