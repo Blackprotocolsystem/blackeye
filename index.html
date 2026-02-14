@@ -3,34 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLACK EYE | Trading Terminal</title>
+    <title>BLACK EYE | Command Center</title>
     <style>
-        :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --dark: #0d0d12; }
+        :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --dark: #0d0d12; --red: #ff4444; }
         body {
             background-color: var(--bg); color: #e0e0e0; font-family: 'Courier New', monospace;
             margin: 0; padding: 10px; background-image: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.25) 50%),
             linear-gradient(90deg, rgba(255,0,0,0.04), rgba(0,255,0,0.01), rgba(0,0,255,0.04));
             background-size: 100% 2px, 3px 100%;
         }
-        .app-container { max-width: 800px; margin: auto; border: 1px solid #1a1a2e; padding: 15px; background: rgba(13, 13, 18, 0.96); box-shadow: 0 0 50px #000; }
-        .logo-header { font-size: 1.8rem; color: var(--purple); text-align: center; letter-spacing: 8px; text-shadow: 0 0 10px var(--purple); margin-bottom: 20px; text-transform: uppercase; }
+        .app-container { max-width: 900px; margin: auto; border: 1px solid #1a1a2e; padding: 15px; background: rgba(13, 13, 18, 0.98); box-shadow: 0 0 50px #000; }
+        .logo-header { font-size: 1.8rem; color: var(--purple); text-align: center; letter-spacing: 8px; text-shadow: 0 0 10px var(--purple); margin-bottom: 15px; text-transform: uppercase; }
         
-        /* Layout Grid untuk Terminal */
-        .terminal-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        @media (min-width: 768px) { .terminal-grid { grid-template-columns: 1.5fr 1fr; } }
+        /* Stats & CA */
+        .ca-display { background: #000; padding: 8px; border: 1px solid #333; font-size: 0.6rem; color: var(--cyan); text-align: center; margin-bottom: 15px; word-break: break-all; }
+        .stats-bar { display: flex; justify-content: space-between; margin-bottom: 15px; gap: 5px; }
+        .stat-item { background: var(--dark); padding: 8px; border: 1px solid #222; font-size: 0.55rem; flex: 1; text-align: center; }
 
-        /* Widget Containers */
-        .chart-container { border: 1px solid #222; height: 400px; background: #000; overflow: hidden; }
-        .swap-container { border: 1px solid var(--purple); background: var(--dark); padding: 10px; min-height: 400px; }
+        /* Main Grid */
+        .terminal-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 15px; }
+        @media (min-width: 768px) { .terminal-grid { grid-template-columns: 1.4fr 1fr; } }
 
-        .ca-display { background: #000; padding: 10px; border: 1px solid #333; font-size: 0.6rem; color: var(--cyan); text-align: center; margin-bottom: 15px; word-break: break-all; }
-        .log-screen { background: #000; padding: 10px; height: 100px; overflow: hidden; border: 1px solid #111; font-size: 0.55rem; color: var(--cyan); margin-top: 15px; }
+        .chart-container { border: 1px solid #222; height: 450px; background: #000; }
+        .swap-container { border: 1px solid var(--purple); background: var(--dark); min-height: 450px; padding: 5px; position: relative; }
+
+        /* Bottom Section */
+        .bottom-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
+        @media (min-width: 768px) { .bottom-grid { grid-template-columns: 1fr 1fr; } }
+
+        .log-screen { background: #000; padding: 10px; height: 120px; overflow: hidden; border: 1px solid #111; font-size: 0.55rem; color: var(--cyan); }
+        .roadmap-box { border: 1px dashed #333; padding: 10px; font-size: 0.55rem; background: rgba(0,0,0,0.3); }
+        
+        .investor-footer { margin-top: 20px; border-top: 1px solid #222; padding-top: 15px; text-align: center; }
+        .investor-icons { display: flex; justify-content: center; gap: 30px; opacity: 0.6; filter: grayscale(1); }
     </style>
 </head>
 <body>
 <div class="app-container">
     <div class="logo-header">BLACK EYE TERMINAL</div>
     
+    <div class="stats-bar">
+        <div class="stat-item">TPS: <span id="tps-val" style="color:var(--cyan)">30.0</span></div>
+        <div class="stat-item">BURNED: <span id="burn-count" style="color:var(--red)">12,450.00</span></div>
+        <div class="stat-item">LP: <span style="color:var(--cyan)">LOCKED</span></div>
+    </div>
+
     <div class="ca-display">
         CA: LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse
     </div>
@@ -43,26 +60,38 @@
             </iframe>
         </div>
 
-        <div class="swap-container" id="integrated-terminal">
-            <div style="text-align: center; padding-top: 50px; color: #444;">
-                <p>INITIALIZING SECURE SWAP...</p>
-                <div id="jupiter-terminal"></div>
-            </div>
+        <div class="swap-container">
+            <div id="jupiter-terminal"></div>
         </div>
     </div>
 
-    <div class="log-screen" id="log-content">
-        [SYSTEM] Interface Ready...<br>
-        [SYSTEM] Connecting to Jupiter Aggregator...<br>
+    <div class="bottom-grid">
+        <div class="log-screen" id="log-content">
+            [SYSTEM] Syncing with Mainnet-Beta...<br>
+            [SYSTEM] Jupiter Aggregator Connected...<br>
+        </div>
+
+        <div class="roadmap-box">
+            <p style="color: var(--purple); margin-top:0;">► ROADMAP STATUS</p>
+            <div style="margin-bottom:5px;">● PHASE 1: STEALH LAUNCH (COMPLETED)</div>
+            <div style="margin-bottom:5px;">● PHASE 2: LIQUIDITY LOCK (ACTIVE)</div>
+            <div style="margin-bottom:5px; color:#666;">○ PHASE 3: CEX LISTING (PENDING)</div>
+        </div>
     </div>
 
-    <div style="margin-top: 20px; text-align: center; font-size: 0.5rem; color: #444; letter-spacing: 2px;">
-        POWERED BY BLACK EYE TECHNOLOGY & JUPITER AGGREGATOR
+    <div class="investor-footer">
+        <div class="investor-icons">
+            <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" height="15">
+            <img src="https://cryptologos.cc/logos/solana-sol-logo.png" height="15">
+            <img src="https://cryptologos.cc/logos/raydium-ray-logo.png" height="15">
+        </div>
+        <p style="color: #222; font-size: 0.45rem; margin-top: 10px;">ENCRYPTED PROTOCOL © 2026</p>
     </div>
 </div>
 
 <script src="https://terminal.jup.ag/main-v2.js"></script>
 <script>
+    // Inisialisasi Jupiter Swap
     window.Jupiter.init({
         displayMode: "integrated",
         integratedTargetId: "jupiter-terminal",
@@ -74,12 +103,20 @@
         },
     });
 
+    // Simulasi Log & Burn
     const log = document.getElementById('log-content');
+    const burnEl = document.getElementById('burn-count');
+    let burnTotal = 12450.00;
+
     setInterval(() => {
-        const hash = Math.random().toString(16).substring(2, 8).toUpperCase();
-        log.innerHTML += `> Syncing Price Feed: ${hash}... OK<br>`;
-        if(log.childNodes.length > 10) log.removeChild(log.firstChild);
-    }, 3000);
+        const hash = Math.random().toString(16).substring(2, 6).toUpperCase();
+        log.innerHTML += `> Ping: Node_${Math.floor(Math.random()*99)} - Data Sync ${hash}<br>`;
+        if(log.childNodes.length > 12) log.removeChild(log.firstChild);
+        
+        document.getElementById('tps-val').innerText = (Math.random() * 10 + 25).toFixed(1);
+        burnTotal += parseFloat((Math.random() * 0.5).toFixed(2));
+        burnEl.innerText = burnTotal.toLocaleString(undefined, {minimumFractionDigits: 2});
+    }, 2500);
 </script>
 </body>
 </html>
