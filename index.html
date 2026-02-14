@@ -24,25 +24,33 @@
         .btn-copy { background: var(--purple); color: #000; border: none; padding: 10px; font-size: 0.7rem; font-weight: bold; width: 100%; cursor: pointer; }
         .log-screen { background: #000; padding: 15px; height: 160px; overflow: hidden; border: 1px solid #111; font-size: 0.6rem; color: var(--cyan); line-height: 1.4; text-align: left; }
         
-        /* Investor Section - 3 Logo Saja */
-        .investor-section { margin-top: 40px; border-top: 1px solid #222; padding-top: 20px; text-align: center; }
+        /* Roadmap Section */
+        .roadmap-container { margin-top: 30px; border: 1px dashed #333; padding: 15px; }
+        .roadmap-item { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .phase { color: var(--purple); font-weight: bold; font-size: 0.6rem; min-width: 60px; }
+        .desc { font-size: 0.55rem; color: #888; }
+
+        /* Investor Section */
+        .investor-section { margin-top: 30px; border-top: 1px solid #222; padding-top: 20px; text-align: center; }
         .investor-grid { display: flex; justify-content: space-around; align-items: center; margin-top: 15px; }
-        .investor-item img { height: 25px; filter: grayscale(1) brightness(1.5); transition: 0.3s; }
-        .investor-item img:hover { filter: grayscale(0) brightness(1); }
+        .investor-item img { height: 20px; filter: grayscale(1) brightness(1.2); }
     </style>
 </head>
 <body>
 <div class="app-container">
     <div class="logo-header">BLACK EYE</div>
+    
     <div class="stats-bar">
         <div class="stat-item">HEIGHT: <span style="color:var(--cyan)">#84.22R</span></div>
         <div class="stat-item">NODES: <span style="color:var(--purple)">1.240</span></div>
         <div class="stat-item">TPS: <span id="tps-val">30.0</span></div>
     </div>
+
     <div class="control-panel">
         <button class="btn-action">Mine Block</button>
         <button class="btn-action btn-cyan">Connect Wallet</button>
     </div>
+
     <div class="ca-box">
         <span style="color: var(--purple); font-size: 0.6rem; letter-spacing: 2px;">OFFICIAL PROTOCOL ADDRESS</span>
         <code class="ca-address" id="ca-text">LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse</code>
@@ -52,29 +60,40 @@
         </div>
         <button class="btn-copy" onclick="copyCA()">COPY CONTRACT ADDRESS</button>
     </div>
+
     <div class="log-screen" id="log-content">
         [SYSTEM] Black Eye Protocol Online...<br>
         [SYSTEM] Tracking 980M Tokens...<br>
     </div>
 
-    <div class="investor-section">
-        <p style="color: #444; font-size: 0.5rem; letter-spacing: 3px; margin-bottom: 20px;">BACKED BY</p>
-        <div class="investor-grid">
-            <div class="investor-item">
-                <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" alt="Binance">
-                <div style="font-size: 0.5rem; margin-top: 5px; color: #666;">BINANCE</div>
-            </div>
-            <div class="investor-item">
-                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana">
-                <div style="font-size: 0.5rem; margin-top: 5px; color: #666;">SOLANA</div>
-            </div>
-            <div class="investor-item">
-                <img src="https://cryptologos.cc/logos/raydium-ray-logo.png" alt="Raydium">
-                <div style="font-size: 0.5rem; margin-top: 5px; color: #666;">RAYDIUM</div>
-            </div>
+    <div class="roadmap-container">
+        <p style="color: #fff; font-size: 0.6rem; margin-top: 0; letter-spacing: 2px;">► SYSTEM ROADMAP</p>
+        <div class="roadmap-item">
+            <span class="phase">PHASE 01</span>
+            <span class="desc">Protocol Initialization & Smart Contract Audit (DONE)</span>
+        </div>
+        <div class="roadmap-item">
+            <span class="phase">PHASE 02</span>
+            <span class="desc">Liquidity Injection & Global Node Expansion (ONGOING)</span>
+        </div>
+        <div class="roadmap-item">
+            <span class="phase">PHASE 03</span>
+            <span class="desc">AI-Based Surveillance Terminal Deployment (UPCOMING)</span>
         </div>
     </div>
+
+    <div class="investor-section">
+        <p style="color: #444; font-size: 0.5rem; letter-spacing: 3px;">SUPPORTED BY</p>
+        <div class="investor-grid">
+            <div class="investor-item"><img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png"><div style="font-size: 0.45rem; color:#666">BINANCE</div></div>
+            <div class="investor-item"><img src="https://cryptologos.cc/logos/solana-sol-logo.png"><div style="font-size: 0.45rem; color:#666">SOLANA</div></div>
+            <div class="investor-item"><img src="https://cryptologos.cc/logos/raydium-ray-logo.png"><div style="font-size: 0.45rem; color:#666">RAYDIUM</div></div>
+        </div>
+    </div>
+
+    <p style="text-align: center; color: #222; font-size: 0.4rem; margin-top: 20px;">ENCRYPTED_CONNECTION: SECURE | NODE_STATUS: STABLE</p>
 </div>
+
 <script>
     function copyCA() { navigator.clipboard.writeText(document.getElementById('ca-text').innerText); alert("Copied!"); }
     const log = document.getElementById('log-content');
