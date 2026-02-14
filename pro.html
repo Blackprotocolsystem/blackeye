@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEYE PRO | Advanced Terminal</title>
+    <style>
+        :root { --bg: #050507; --purple: #bb86fc; --cyan: #03dac6; --dark: #0d1117; }
+        body { background-color: var(--bg); color: #e0e0e0; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; }
+        
+        .navbar { padding: 10px 20px; border-bottom: 1px solid #1a1a2e; display: flex; justify-content: space-between; align-items: center; background: #000; height: 50px; }
+        .logo { color: var(--purple); font-weight: bold; letter-spacing: 3px; text-decoration: none; }
+        .nav-links a { color: var(--cyan); text-decoration: none; font-size: 0.7rem; margin-left: 15px; border: 1px solid var(--cyan); padding: 4px 8px; }
+
+        .pro-container { display: grid; grid-template-columns: 250px 1fr 300px; height: calc(100vh - 50px); gap: 2px; background: #1a1a2e; }
+        
+        /* Sidebar Market Info */
+        .sidebar { background: var(--bg); padding: 10px; font-size: 0.6rem; overflow-y: auto; }
+        .market-item { padding: 8px; border-bottom: 1px solid #111; display: flex; justify-content: space-between; }
+
+        /* Main Chart Area */
+        .main-chart { background: #000; position: relative; }
+
+        /* Order Book Area */
+        .order-book { background: var(--bg); border-left: 1px solid #1a1a2e; padding: 10px; font-size: 0.6rem; }
+        .book-row { display: flex; justify-content: space-between; padding: 2px 0; }
+        .bid { color: var(--cyan); }
+        .ask { color: #ff4444; }
+
+        @media (max-width: 900px) {
+            .pro-container { grid-template-columns: 1fr; overflow-y: auto; }
+            .sidebar, .order-book { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">BEYE PRO</a>
+        <div class="nav-links">
+            <a href="index.html">DASHBOARD</a>
+            <a href="swap.html">BASIC SWAP</a>
+        </div>
+    </nav>
+
+    <div class="pro-container">
+        <div class="sidebar">
+            <div style="color:var(--purple); margin-bottom:10px;">MARKETS</div>
+            <div class="market-item"><span>BEYE/SOL</span><span class="bid">ACTIVE</span></div>
+            <div class="market-item"><span>BTC/SOL</span><span style="color:#444">SOON</span></div>
+        </div>
+
+        <div class="main-chart">
+            <iframe 
+                src="https://dexscreener.com/solana/LxgLDzaPKvAepoH2c71EBqrrFk58U6CLi11Ep2jyDse?embed=1&theme=dark" 
+                style="width: 100%; height: 100%; border: none;">
+            </iframe>
+        </div>
+
+        <div class="order-book">
+            <div style="color:var(--purple); margin-bottom:10px;">ORDER BOOK</div>
+            <div class="book-row"><span>PRICE(SOL)</span><span>SIZE(BEYE)</span></div>
+            <div class="book-row ask"><span>0.000452</span><span>12,400</span></div>
+            <div class="book-row ask"><span>0.000451</span><span>5,000</span></div>
+            <div style="text-align:center; padding:10px; font-size:0.8rem; color:var(--cyan);">0.000450</div>
+            <div class="book-row bid"><span>0.000449</span><span>8,200</span></div>
+            <div class="book-row bid"><span>0.000448</span><span>25,000</span></div>
+            
+            <div style="margin-top:20px; border:1px solid var(--purple); padding:10px; text-align:center;">
+                <span style="font-size:0.5rem; display:block;">PRO TRADING</span>
+                <button style="background:var(--purple); border:none; width:100%; margin-top:5px; font-family:inherit; cursor:pointer;" onclick="location.href='swap.html'">OPEN SWAP</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
